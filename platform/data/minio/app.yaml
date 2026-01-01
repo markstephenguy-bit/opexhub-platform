@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.min.io/
+    chart: minio
+    targetRevision: "*"   # latest chart available in repo
+    helm:
+      values: |
+        mode: standalone
+        persistence:
+          enabled: true
+          storageClass: longhorn
+          size: 50Gi
+        resources: {}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: data
+  syncPolicy:
+    automated: null
