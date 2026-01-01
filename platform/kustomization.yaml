@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - data/minio/app.yaml
   - infra/ingress-nginx/app.yaml
+  - bi/superset/app.yaml
